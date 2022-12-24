@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import Stopwatch from './Stopwatch';
-import snesURL from '../assets/snes.jpg';
+import imgURL from '../assets/n64.jpeg';
 
 function Game() {
   const [duration, setDuration] = useState(0);
@@ -30,7 +30,7 @@ function Game() {
       <h1>Game</h1>
       <Stopwatch duration={duration} />
       <div className='img-container'>
-        <img id='game-image' src={snesURL} alt='snes' onLoad={handleLoad} />
+        <img id='game-image' src={imgURL} alt='snes' onLoad={handleLoad} />
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 #root {
   min-height: 100vh;
+  min-width: 1062px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -14,4 +15,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.img-container {
+  position: relative;
 }
