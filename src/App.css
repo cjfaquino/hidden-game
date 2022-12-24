@@ -10,6 +10,20 @@
   min-height: calc(100vh - var(--footer-size));
 }
 
+.home {
+  display: flex;
+  gap: 100px;
+}
+
+.home-img-container {
+  max-width: 300px;
+}
+
+.home-img-container img {
+  height: 100%;
+  width: 100%;
+}
+
 .game {
   min-width: 100vw;
   display: flex;
@@ -17,7 +31,7 @@
   align-items: center;
 }
 
-.img-container {
+.game-img-container {
   position: relative;
 }
 
