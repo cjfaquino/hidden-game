@@ -1,11 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
+import MyFooter from './components/MyFooter/MyFooter';
 import './index.css';
 import './firebase';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <App />
+    <MyFooter />
   </React.StrictMode>
 );
