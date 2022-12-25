@@ -16,9 +16,9 @@ const levels = [
     'Nintendo 64',
     'N64',
     imgN64,
-    { name: 'Luigi', x: 785, y: 749 },
-    { name: 'Conker', x: 433, y: 955 },
-    { name: 'Bobomb', x: 774, y: 1006 }
+    { name: 'Luigi', found: false, x: 785, y: 749 },
+    { name: 'Conker', found: false, x: 433, y: 955 },
+    { name: 'Bobomb', found: false, x: 774, y: 1006 }
   ),
   new Level('Nintendo Gamecube', 'GC', imgGc),
   new Level('Nintendo Wii', 'WII', imgWii),

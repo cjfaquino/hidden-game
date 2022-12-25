@@ -43,3 +43,7 @@ nav {
 .popup {
   position: absolute;
 }
+
+.found {
+  color: rgb(178, 178, 178);
+}

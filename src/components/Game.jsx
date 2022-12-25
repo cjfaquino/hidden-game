@@ -13,6 +13,7 @@ function Game() {
   const [duration, setDuration] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [popup, setPopup] = useState(null);
+  const [itemsArr, setItemsArr] = useState(items);
 
   useEffect(() => {
     let interval;
@@ -35,6 +36,14 @@ function Game() {
     const x = e.pageX - e.currentTarget.offsetLeft;
     const y = e.pageY - e.currentTarget.offsetTop;
     return { x, y };
+  };
+
+  const setItemFound = (name) => {
+    const newArr = itemsArr.map((item) => {
+      if (name === item.name) return { ...item, found: true };
+      return item;
+    });
+    setItemsArr(newArr);
   };
 
   const checkCoords = (item, position) => () => {
@@ -61,8 +70,9 @@ function Game() {
     const div = (
       <Popup
         styles={styles}
-        items={items}
+        items={itemsArr}
         checkCoords={checkCoords}
+        setItemFound={setItemFound}
         coords={coords}
       />
     );
@@ -74,6 +84,11 @@ function Game() {
   return (
     <div className='game'>
       <h1>Game</h1>
+      <div>
+        {itemsArr.map((item) => (
+          <span className={!item.found ? '' : 'found'}>{item.name}</span>
+        ))}
+      </div>
       <Stopwatch duration={duration} />
       <div className='game-img-container' onClick={handlePopup}>
         <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
