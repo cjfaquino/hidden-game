@@ -29,13 +29,19 @@ nav ul {
 }
 
 .home {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 100px;
+  padding: 40px 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  justify-content: center;
+  gap: 50px;
 }
 
 .home-img-container {
-  max-width: 250px;
+  max-width: 450px;
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 .home-img-container img {

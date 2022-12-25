@@ -17,6 +17,11 @@ ul {
   padding: 0;
 }
 
+html,
+body {
+  width: 100vw;
+}
+
 li {
   list-style: none;
 }

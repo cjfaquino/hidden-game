@@ -9,12 +9,10 @@ function Home() {
         const { name, thumbUrl } = level;
 
         return (
-          <div className='level-card' key={crypto.randomUUID()}>
-            <div className='home-img-container'>
-              <Link to={`level/${name.short}`} state={level}>
-                <img src={thumbUrl} alt={name.long} />
-              </Link>
-            </div>
+          <div className='home-img-container' key={crypto.randomUUID()}>
+            <Link to={`level/${name.short}`} state={level}>
+              <img src={thumbUrl} alt={name.long} />
+            </Link>
           </div>
         );
       })}
