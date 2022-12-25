@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Popup({ styles, items }) {
-  console.log(items);
+function Popup({ styles, items, checkCoords, coords }) {
   return (
     <div className='popup' style={styles}>
       <ul>
         {items.map((item) => (
           <li key={crypto.randomUUID()}>
-            <button type='button'>{item.name}</button>
+            <button type='button' onClick={checkCoords(item, coords)}>
+              {item.name}
+            </button>
           </li>
         ))}
       </ul>
@@ -28,6 +29,11 @@ Popup.propTypes = {
       y: PropTypes.number,
     })
   ).isRequired,
+  checkCoords: PropTypes.func.isRequired,
+  coords: PropTypes.shape({
+    x: PropTypes.number,
+    y: PropTypes.number,
+  }).isRequired,
 };
 
 export default Popup;

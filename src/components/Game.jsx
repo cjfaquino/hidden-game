@@ -37,14 +37,35 @@ function Game() {
     return { x, y };
   };
 
+  const checkCoords = (item, position) => () => {
+    const { x: itemX, y: itemY } = item;
+    const { x, y } = position;
+    const distance = 20;
+    if (
+      x >= itemX - distance &&
+      x <= itemX + distance &&
+      y >= itemY - distance &&
+      y <= itemY + distance
+    )
+      return true;
+    return false;
+  };
+
   const handlePopup = (e) => {
     const { x, y } = getCoords(e);
-    // console.log(x, y);
+    const coords = { x, y };
     const styles = {
       top: y,
       left: x,
     };
-    const div = <Popup styles={styles} items={items} />;
+    const div = (
+      <Popup
+        styles={styles}
+        items={items}
+        checkCoords={checkCoords}
+        coords={coords}
+      />
+    );
 
     if (popup === null) setPopup(div);
     else if (popup) setPopup(null);
