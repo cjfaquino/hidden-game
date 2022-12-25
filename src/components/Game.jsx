@@ -41,7 +41,11 @@ function Game() {
   const getCoords = (e) => {
     const x = e.pageX - e.currentTarget.offsetLeft;
     const y = e.pageY - e.currentTarget.offsetTop;
-    return { x, y };
+
+    const xPerc = (x / e.currentTarget.clientWidth) * 100;
+    const yPerc = (y / e.currentTarget.clientHeight) * 100;
+
+    return { x: xPerc, y: yPerc };
   };
 
   const setItemFound = (name) => {
@@ -55,7 +59,7 @@ function Game() {
   const checkCoords = (item, position) => () => {
     const { x: itemX, y: itemY } = item;
     const { x, y } = position;
-    const distance = 20;
+    const distance = 3;
     if (
       x >= itemX - distance &&
       x <= itemX + distance &&
@@ -69,9 +73,12 @@ function Game() {
   const handlePopup = (e) => {
     const { x, y } = getCoords(e);
     const coords = { x, y };
+
+    console.log(coords);
+
     const styles = {
-      top: y,
-      left: x,
+      top: `${y}%`,
+      left: `${x}%`,
     };
     const div = (
       <Popup

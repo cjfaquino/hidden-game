@@ -28,8 +28,8 @@ function Popup({ styles, items, checkCoords, coords, setItemFound }) {
 
 Popup.propTypes = {
   styles: PropTypes.shape({
-    top: PropTypes.number,
-    left: PropTypes.number,
+    top: PropTypes.string,
+    left: PropTypes.string,
   }).isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
