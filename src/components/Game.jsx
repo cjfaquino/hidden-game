@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import Stopwatch from './Stopwatch';
+import MyNav from './MyNav';
 import Popup from './Popup';
 
 function Game() {
@@ -73,9 +73,6 @@ function Game() {
   const handlePopup = (e) => {
     const { x, y } = getCoords(e);
     const coords = { x, y };
-
-    console.log(coords);
-
     const styles = {
       top: `${y}%`,
       left: `${x}%`,
@@ -95,23 +92,15 @@ function Game() {
   };
 
   return (
-    <div className='game'>
-      <div>
-        {itemsArr.map((item) => (
-          <span
-            className={!item.found ? '' : 'found'}
-            key={crypto.randomUUID()}
-          >
-            {item.name}
-          </span>
-        ))}
+    <>
+      <MyNav duration={duration} items={itemsArr} />
+      <div className='game'>
+        <div className='game-img-container' onClick={handlePopup}>
+          <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
+          {popup}
+        </div>
       </div>
-      <Stopwatch duration={duration} />
-      <div className='game-img-container' onClick={handlePopup}>
-        <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
-        {popup}
-      </div>
-    </div>
+    </>
   );
 }
 
