@@ -1,17 +1,20 @@
-const fancyTime = (seconds) => {
+const fancyTime = (duration) => {
+  const seconds = duration / 10;
   // Hours, minutes and seconds
-  const hrs = Math.floor(seconds / 3600).toString();
-  const mins = Math.floor((seconds % 3600) / 60)
+  const hh = Math.floor(seconds / 3600).toString();
+  const mm = Math.floor((seconds % 3600) / 60)
     .toString()
     .padStart(2, '0');
-  const secs = Math.floor(seconds % 60)
+  const ss = Math.floor(seconds % 60)
     .toString()
     .padStart(2, '0');
 
-  let time = `${mins}:${secs}`;
+  const S = Math.floor(duration % 10);
 
-  if (hrs > 0) {
-    time = `${hrs}:${mins}:${secs}`;
+  let time = `${mm}:${ss}.${S}`;
+
+  if (hh > 0) {
+    time = `${hh}:${mm}:${ss}.${S}`;
   }
   return time;
 };

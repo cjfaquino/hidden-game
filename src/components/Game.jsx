@@ -20,7 +20,7 @@ function Game() {
     if (isActive) {
       interval = setInterval(() => {
         setDuration((x) => x + 1);
-      }, 1000);
+      }, 100);
     }
 
     return () => {
