@@ -28,6 +28,12 @@ function Game() {
     };
   }, [isActive]);
 
+  const checkIfAllFound = () => itemsArr.every((item) => item.found);
+
+  useEffect(() => {
+    if (checkIfAllFound()) setIsActive(false);
+  }, [itemsArr]);
+
   const handleLoad = () => {
     setIsActive(true);
   };
@@ -86,7 +92,12 @@ function Game() {
       <h1>Game</h1>
       <div>
         {itemsArr.map((item) => (
-          <span className={!item.found ? '' : 'found'}>{item.name}</span>
+          <span
+            className={!item.found ? '' : 'found'}
+            key={crypto.randomUUID()}
+          >
+            {item.name}
+          </span>
         ))}
       </div>
       <Stopwatch duration={duration} />
