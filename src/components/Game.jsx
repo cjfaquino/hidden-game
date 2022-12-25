@@ -8,7 +8,7 @@ import Popup from './Popup';
 
 function Game() {
   const location = useLocation();
-  const { imgUrl } = location.state;
+  const { imgUrl, items } = location.state;
 
   const [duration, setDuration] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -31,14 +31,20 @@ function Game() {
     setIsActive(true);
   };
 
-  const handlePopup = (e) => {
+  const getCoords = (e) => {
     const x = e.pageX - e.currentTarget.offsetLeft;
     const y = e.pageY - e.currentTarget.offsetTop;
+    return { x, y };
+  };
+
+  const handlePopup = (e) => {
+    const { x, y } = getCoords(e);
+    // console.log(x, y);
     const styles = {
       top: y,
       left: x,
     };
-    const div = <Popup styles={styles} />;
+    const div = <Popup styles={styles} items={items} />;
 
     if (popup === null) setPopup(div);
     else if (popup) setPopup(null);

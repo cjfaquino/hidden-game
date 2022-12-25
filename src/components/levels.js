@@ -12,7 +12,14 @@ import imgXbox from '../assets/xbox.jpeg';
 import img360 from '../assets/360.jpeg';
 
 const levels = [
-  new Level('Nintendo 64', 'N64', imgN64),
+  new Level(
+    'Nintendo 64',
+    'N64',
+    imgN64,
+    { name: 'Luigi', x: 785, y: 749 },
+    { name: 'Conker', x: 433, y: 955 },
+    { name: 'Bobomb', x: 774, y: 1006 }
+  ),
   new Level('Nintendo Gamecube', 'GC', imgGc),
   new Level('Nintendo Wii', 'WII', imgWii),
   new Level('PlayStation 1', 'PS1', imgPs1),
