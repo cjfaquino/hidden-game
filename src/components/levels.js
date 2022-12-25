@@ -1,5 +1,6 @@
 import Level from './Level';
 
+import imgSnes from '../assets/snes.jpeg';
 import imgN64 from '../assets/n64.jpeg';
 import imgGc from '../assets/gc.jpeg';
 import imgWii from '../assets/wii.jpeg';
@@ -7,12 +8,19 @@ import imgPs1 from '../assets/ps1.jpeg';
 import imgPs2 from '../assets/ps2.jpeg';
 import imgPs3 from '../assets/ps3.jpeg';
 import imgPs4 from '../assets/ps4.jpeg';
-import imgDc from '../assets/dc.jpeg';
 import imgXbox from '../assets/xbox.jpeg';
 import img360 from '../assets/360.jpeg';
 
 const levels = [
   new Level(
+    new Level(
+      'Super Nintendo',
+      'SNES',
+      imgSnes,
+      { name: 'Nightmare', found: false, x: 69.6, y: 38.5 },
+      { name: 'Ulala', found: false, x: 51, y: 81.8 },
+      { name: 'Sonic', found: false, x: 28, y: 34.5 }
+    ),
     'Nintendo 64',
     'N64',
     imgN64,
@@ -67,14 +75,6 @@ const levels = [
     { name: 'Wolf', found: false, x: 67.5, y: 43.9 },
     { name: 'Snake', found: false, x: 47.9, y: 36 },
     { name: '2B', found: false, x: 28, y: 69 }
-  ),
-  new Level(
-    'Sega Dreamcast',
-    'DC',
-    imgDc,
-    { name: 'Nightmare', found: false, x: 69.6, y: 38.5 },
-    { name: 'Ulala', found: false, x: 51, y: 81.8 },
-    { name: 'Sonic', found: false, x: 28, y: 34.5 }
   ),
   new Level(
     'Microsoft Xbox',
