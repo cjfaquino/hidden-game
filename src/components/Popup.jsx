@@ -39,6 +39,7 @@ Popup.propTypes = {
     })
   ).isRequired,
   checkCoords: PropTypes.func.isRequired,
+  setItemFound: PropTypes.func.isRequired,
   coords: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
