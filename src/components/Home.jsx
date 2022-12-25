@@ -6,13 +6,13 @@ function Home() {
   return (
     <div className='home'>
       {levels.map((level) => {
-        const { name, imgUrl } = level;
+        const { name, thumbUrl } = level;
 
         return (
           <div className='level-card' key={crypto.randomUUID()}>
             <div className='home-img-container'>
               <Link to={`level/${name.short}`} state={level}>
-                <img src={imgUrl} alt={name.long} />
+                <img src={thumbUrl} alt={name.long} />
               </Link>
             </div>
             <div>{name.long}</div>
