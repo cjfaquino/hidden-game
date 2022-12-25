@@ -16,11 +16,12 @@ nav {
 
 .home {
   display: flex;
+  flex-wrap: wrap;
   gap: 100px;
 }
 
 .home-img-container {
-  max-width: 300px;
+  max-width: 250px;
 }
 
 .home-img-container img {
