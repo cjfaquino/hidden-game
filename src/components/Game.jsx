@@ -56,7 +56,7 @@ function Game() {
     setItemsArr(newArr);
   };
 
-  const checkCoords = (item, position) => () => {
+  const checkCoords = (item, position) => {
     const { x: itemX, y: itemY } = item;
     const { x, y } = position;
     const distance = 3;
