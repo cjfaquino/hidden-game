@@ -15,7 +15,6 @@ function Home() {
                 <img src={thumbUrl} alt={name.long} />
               </Link>
             </div>
-            <div>{name.long}</div>
           </div>
         );
       })}
