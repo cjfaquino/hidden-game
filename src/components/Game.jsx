@@ -3,8 +3,10 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
+import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
+import Score from './Score';
 
 function Game() {
   const location = useLocation();
@@ -13,6 +15,8 @@ function Game() {
   const [duration, setDuration] = useState(0);
   const [isActive, setIsActive] = useState(false);
   const [popup, setPopup] = useState(null);
+  const [submitScorePopup, setSubmitScorePopup] = useState(false);
+  const [username, setUsername] = useState('Anonymous');
   const [itemsArr, setItemsArr] = useState(items);
 
   useEffect(() => {
@@ -30,8 +34,28 @@ function Game() {
 
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
+  const submitScore = () => {
+    console.log(`submitted ${username}`);
+    console.log(new Score(duration, username));
+  };
+
+  const cancelSubmit = () => {
+    setSubmitScorePopup(false);
+  };
+
+  const changeUsername = (input) => {
+    setUsername(input);
+  };
+
+  const showScorePopup = () => {
+    setSubmitScorePopup(true);
+  };
+
   useEffect(() => {
-    if (checkIfAllFound()) setIsActive(false);
+    if (checkIfAllFound()) {
+      setIsActive(false);
+      showScorePopup();
+    }
   }, [itemsArr]);
 
   const handleLoad = () => {
@@ -99,6 +123,13 @@ function Game() {
           <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
           {popup}
         </div>
+        {submitScorePopup && (
+          <SubmitScorePopup
+            duration={duration}
+            buttonHandlers={{ submitScore, cancelSubmit }}
+            name={{ username, changeUsername }}
+          />
+        )}
       </div>
     </>
   );
