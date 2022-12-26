@@ -6,7 +6,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
-import Score from './Score';
+
+import { addToScoresDB } from '../firebase';
 
 function Game() {
   const navigate = useNavigate();
@@ -39,9 +40,17 @@ function Game() {
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
   const submitScore = () => {
-    const score = new Score(duration, username);
+    // const score = new Score(duration, username);
+    const score = {
+      date: new Date(),
+      user: username,
+      score: duration,
+      level: level.name.short,
+    };
 
-    navigate(`leaderboard`, { state: { score, level } });
+    addToScoresDB(score, level.name.short);
+
+    navigate(`leaderboard`, { state: level });
   };
 
   const cancelSubmit = () => {
