@@ -121,3 +121,13 @@ nav ul {
 .submit-btns button {
   width: 100%;
 }
+
+/* Leaderboard */
+
+.board-img-container {
+  max-width: 100px;
+}
+
+.board-img-container img {
+  width: 100%;
+}
