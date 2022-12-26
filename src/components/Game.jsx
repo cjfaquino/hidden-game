@@ -2,15 +2,19 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
 import Score from './Score';
 
 function Game() {
+  const navigate = useNavigate();
   const location = useLocation();
-  const { imgUrl, items } = location.state;
+  if (location.state === null) navigate('/');
+
+  const level = location.state;
+  const { imgUrl, items } = level;
 
   const [duration, setDuration] = useState(0);
   const [isActive, setIsActive] = useState(false);
@@ -35,8 +39,9 @@ function Game() {
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
   const submitScore = () => {
-    console.log(`submitted ${username}`);
-    console.log(new Score(duration, username));
+    const score = new Score(duration, username);
+
+    navigate(`leaderboard`, { state: { score, level } });
   };
 
   const cancelSubmit = () => {

@@ -21,9 +21,7 @@ function MyNav({ duration, items }) {
               {item.name}
             </li>
           ))}
-          <li>
-            <Stopwatch duration={duration} />
-          </li>
+          <li>{duration !== null && <Stopwatch duration={duration} />}</li>
         </ul>
       </nav>
       <Outlet />
@@ -37,7 +35,7 @@ MyNav.propTypes = {
 };
 
 MyNav.defaultProps = {
-  duration: '',
+  duration: null,
   items: [],
 };
 
