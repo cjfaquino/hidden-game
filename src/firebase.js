@@ -6,9 +6,14 @@ import {
   addDoc,
   orderBy,
   limit,
+  setDoc,
+  doc,
   getDocs,
   query,
 } from 'firebase/firestore';
+
+import Level from './components/Level';
+import levels from './components/levels';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -54,3 +59,36 @@ export const getScores = async (levelName) => {
 
   return scores;
 };
+
+// const levelConverter = {
+//   toFirestore: (level) => ({
+//     name: level.name,
+//     imgUrl: level.imgUrl,
+//     thumbUrl: level.thumbUrl,
+//     items: level.items,
+//   }),
+//   fromFirestore: (snapshot, options) => {
+//     const data = snapshot.data(options);
+//     return new Level(
+//       data.name,
+//       data.imgUrl,
+//       data.thumbUrl,
+//       data.items[0],
+//       data.items[1],
+//       data.items[2]
+//     );
+//   },
+// };
+
+// const addLevelToDb = async (level) => {
+//   try {
+//     const ref = doc(db, 'level', level.name.short).withConverter(
+//       levelConverter
+//     );
+//     await setDoc(ref, level);
+//   } catch (e) {
+//     console.error('Error adding document: ', e);
+//   }
+// };
+
+// levels.forEach((level) => addLevelToDb(level));
