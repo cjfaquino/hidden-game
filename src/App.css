@@ -25,6 +25,11 @@ nav ul {
   margin-right: 50px;
 }
 
+.leaderboard-link {
+  margin-right: 0;
+  margin-left: auto;
+}
+
 .app {
   min-height: calc(100vh - var(--footer-size));
   background-color: rgb(238, 238, 238);

@@ -1,18 +1,26 @@
 import React from 'react';
-import { Outlet, Link } from 'react-router-dom';
+import {
+  Outlet,
+  Link,
+  useParams,
+  useLocation,
+  useNavigate,
+} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Stopwatch from './Stopwatch';
 
 function MyNav({ duration, items }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const params = useParams();
   return (
     <>
       <nav>
         <ul>
-          <li>
-            <Link to='/' className='home-link'>
-              Home
-            </Link>
+          <li className='home-link'>
+            <Link to='/'>Home</Link>
           </li>
+
           {items.map((item) => (
             <li
               className={!item.found ? '' : 'found'}
@@ -22,6 +30,17 @@ function MyNav({ duration, items }) {
             </li>
           ))}
           <li>{duration !== null && <Stopwatch duration={duration} />}</li>
+
+          <li className='leaderboard-link'>
+            {!location.pathname.endsWith('leaderboard') && (
+              <Link to={`/${params.name}/leaderboard`}>Leaderboard</Link>
+            )}
+            {location.pathname.endsWith('leaderboard') && (
+              <button type='button' onClick={() => navigate(-1)}>
+                Retry
+              </button>
+            )}
+          </li>
         </ul>
       </nav>
       <Outlet />
