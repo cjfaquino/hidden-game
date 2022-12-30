@@ -56,7 +56,7 @@ const levels = [
     imgWii,
     thumbWii,
     { name: 'Samus', found: false, x: 71.6, y: 46.2 },
-    { name: 'Conker', found: false, x: 24.1, y: 55.1 },
+    { name: 'Joe', found: false, x: 24.1, y: 55.1 },
     { name: 'Midna', found: false, x: 39, y: 33.5 }
   ),
   new Level(
