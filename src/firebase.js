@@ -1,6 +1,14 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getFirestore, collection, addDoc } from 'firebase/firestore';
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  orderBy,
+  limit,
+  getDocs,
+  query,
+} from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,4 +36,21 @@ export const addToScoresDB = async (score, levelName) => {
   } catch (e) {
     console.error('Error adding document: ', e);
   }
+};
+
+export const getScores = async (levelName) => {
+  const q = query(
+    collection(db, levelName),
+    orderBy('score', 'asc'),
+    limit(10)
+  );
+
+  const scores = [];
+  const querySnapshot = await getDocs(q);
+  querySnapshot.forEach((dc) => {
+    // doc.data() is never undefined for query doc snapshots
+    scores.push(dc.data());
+  });
+
+  return scores;
 };
