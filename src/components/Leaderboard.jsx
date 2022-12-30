@@ -4,6 +4,7 @@ import levels from './levels';
 import MyNav from './MyNav';
 import { getScores } from '../firebase';
 import fancyTime from '../utils/fancyTime';
+import formatDate from '../utils/formatDate';
 
 function Leaderboard() {
   const params = useParams();
@@ -49,12 +50,21 @@ function Leaderboard() {
       )}
 
       {scores.length > 0 &&
-        scores.map((obj) => (
-          <div key={crypto.randomUUID()}>
-            <div>{obj.user}</div>
-            <div>{fancyTime(obj.score)}s</div>
-          </div>
-        ))}
+        scores.map((obj) => {
+          const {
+            user,
+            score,
+            date: { seconds },
+          } = obj;
+
+          return (
+            <div key={crypto.randomUUID()} className='scoreboard'>
+              <div className='scoreboard-user'>{user}</div>
+              <div className='scoreboard-score'>{fancyTime(score)}s</div>
+              <div className='scoreboard-date'>{formatDate(seconds)}</div>
+            </div>
+          );
+        })}
     </>
   );
 }
