@@ -168,4 +168,6 @@ nav ul {
   grid-template-rows: 60px;
   grid-auto-rows: 45px;
   font-size: 1.3rem;
+  height: 100%;
+  width: 100%;
 }
