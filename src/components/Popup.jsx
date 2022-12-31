@@ -1,37 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function Popup({ styles, items, checkCoords, coords, setItemFound }) {
-  const handleClick = (item) => () => {
-    const { name } = item;
-    if (checkCoords(name, coords)) {
-      setItemFound(name);
-    }
-  };
+const Popup = React.forwardRef(
+  ({ items, checkCoords, coords, setItemFound }, ref) => {
+    const handleClick = (item) => () => {
+      const { name } = item;
+      if (checkCoords(name, coords)) {
+        setItemFound(name);
+      }
+    };
 
-  return (
-    <div className='popup' style={styles}>
-      <ul>
-        {items.map(
-          (item) =>
-            !item.found && (
-              <li key={crypto.randomUUID()}>
-                <button type='button' onClick={handleClick(item)}>
-                  {item.name}
-                </button>
-              </li>
-            )
-        )}
-      </ul>
-    </div>
-  );
-}
+    const { x, y } = coords;
+    const styles = {
+      top: `${y}%`,
+      left: `${x}%`,
+    };
+
+    return (
+      <div className='popup' style={styles} ref={ref}>
+        <ul>
+          {items.map(
+            (item) =>
+              !item.found && (
+                <li key={crypto.randomUUID()}>
+                  <button type='button' onClick={handleClick(item)}>
+                    {item.name}
+                  </button>
+                </li>
+              )
+          )}
+        </ul>
+      </div>
+    );
+  }
+);
 
 Popup.propTypes = {
-  styles: PropTypes.shape({
-    top: PropTypes.string,
-    left: PropTypes.string,
-  }).isRequired,
   items: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string,

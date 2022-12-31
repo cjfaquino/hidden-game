@@ -12,7 +12,6 @@ function usePopupSize(ref) {
     }
   }, []);
 
-  console.log(size);
   return size;
 }
 

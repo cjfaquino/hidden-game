@@ -1,13 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropType from 'prop-types';
+import usePopupSize from '../utils/usePopupSize';
 import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
-
 import { addToScoresDB, getLevelFromDb } from '../firebase';
 
 function Game({ username, changeUsername }) {
@@ -15,12 +15,16 @@ function Game({ username, changeUsername }) {
   const location = useLocation();
   if (location.state === null) navigate('/');
 
+  const popupRef = useRef();
+  usePopupSize(popupRef);
+
   const level = location.state;
   const { imgUrl, items } = level;
 
   const [duration, setDuration] = useState(0);
+  const [coords, setCoords] = useState({ x: undefined, y: undefined });
   const [isActive, setIsActive] = useState(false);
-  const [popup, setPopup] = useState(null);
+  const [showPopup, setShowPopup] = useState(false);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
   const [itemsArr, setItemsArr] = useState(items);
   const [dbLevel, setDbLevel] = useState(null);
@@ -115,24 +119,11 @@ function Game({ username, changeUsername }) {
   };
 
   const handlePopup = (e) => {
-    const { x, y } = getCoords(e);
-    const coords = { x, y };
-    const styles = {
-      top: `${y}%`,
-      left: `${x}%`,
-    };
-    const div = (
-      <Popup
-        styles={styles}
-        items={itemsArr}
-        checkCoords={checkCoords}
-        setItemFound={setItemFound}
-        coords={coords}
-      />
-    );
+    const target = getCoords(e);
+    setCoords(target);
 
-    if (popup === null) setPopup(div);
-    else if (popup) setPopup(null);
+    if (!showPopup) setShowPopup(true);
+    else if (showPopup) setShowPopup(false);
   };
 
   return (
@@ -141,7 +132,15 @@ function Game({ username, changeUsername }) {
       <div className='game'>
         <div className='game-img-container' onClick={handlePopup}>
           <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
-          {popup}
+          {showPopup && (
+            <Popup
+              ref={popupRef}
+              items={itemsArr}
+              checkCoords={checkCoords}
+              setItemFound={setItemFound}
+              coords={coords}
+            />
+          )}
         </div>
         {submitScorePopup && (
           <SubmitScorePopup
