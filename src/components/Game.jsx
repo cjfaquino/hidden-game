@@ -15,14 +15,10 @@ function Game({ username, changeUsername }) {
   const location = useLocation();
   if (location.state === null) navigate('/');
 
-  const popupRef = useRef();
-  usePopupSize(popupRef);
-
   const level = location.state;
   const { imgUrl, items } = level;
 
   const [duration, setDuration] = useState(0);
-  const [coords, setCoords] = useState({ x: undefined, y: undefined });
   const [isActive, setIsActive] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
@@ -88,7 +84,13 @@ function Game({ username, changeUsername }) {
     const xPerc = (x / e.currentTarget.clientWidth) * 100;
     const yPerc = (y / e.currentTarget.clientHeight) * 100;
 
-    return { x: xPerc, y: yPerc };
+    return {
+      x: xPerc,
+      y: yPerc,
+      clientWidth: e.currentTarget.clientWidth,
+      clientHeight: e.currentTarget.clientHeight,
+      clientY: e.clientY,
+    };
   };
 
   const setItemFound = (name) => {
@@ -118,12 +120,41 @@ function Game({ username, changeUsername }) {
     return false;
   };
 
-  const handlePopup = (e) => {
-    const target = getCoords(e);
-    setCoords(target);
+  const setPopupBoundaries = (popupSize, coords) => {
+    const popXPerc = (popupSize.x / coords.clientWidth) * 100;
+    const popYPerc = (popupSize.y / window.innerHeight) * 100;
+    const clientYPerc = (coords.clientY / window.innerHeight) * 100;
 
-    if (!showPopup) setShowPopup(true);
-    else if (showPopup) setShowPopup(false);
+    let newCoords = coords;
+    if (popupSize.x && popupSize.y) {
+      if (coords.x + popXPerc > 100) {
+        const newX = coords.x - popXPerc;
+        newCoords = { ...newCoords, x: newX };
+      }
+      if (clientYPerc + popYPerc > 100) {
+        const newY = coords.y - (popupSize.y / coords.clientHeight) * 100;
+        newCoords = { ...newCoords, y: newY };
+      }
+    }
+
+    return newCoords;
+  };
+
+  const handlePopup = (e) => {
+    const coords = getCoords(e);
+
+    const div = (
+      <Popup
+        items={itemsArr}
+        checkCoords={checkCoords}
+        setItemFound={setItemFound}
+        coords={coords}
+        setPopupBoundaries={setPopupBoundaries}
+      />
+    );
+
+    if (!showPopup) setShowPopup(div);
+    else if (showPopup) setShowPopup(null);
   };
 
   return (
@@ -132,15 +163,7 @@ function Game({ username, changeUsername }) {
       <div className='game'>
         <div className='game-img-container' onClick={handlePopup}>
           <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
-          {showPopup && (
-            <Popup
-              ref={popupRef}
-              items={itemsArr}
-              checkCoords={checkCoords}
-              setItemFound={setItemFound}
-              coords={coords}
-            />
-          )}
+          {showPopup}
         </div>
         {submitScorePopup && (
           <SubmitScorePopup
