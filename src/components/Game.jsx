@@ -3,13 +3,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
+import PropType from 'prop-types';
 import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
 
 import { addToScoresDB, getLevelFromDb } from '../firebase';
 
-function Game() {
+function Game({ username, changeUsername }) {
   const navigate = useNavigate();
   const location = useLocation();
   if (location.state === null) navigate('/');
@@ -21,7 +22,6 @@ function Game() {
   const [isActive, setIsActive] = useState(false);
   const [popup, setPopup] = useState(null);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
-  const [username, setUsername] = useState('Anonymous');
   const [itemsArr, setItemsArr] = useState(items);
   const [dbLevel, setDbLevel] = useState(null);
 
@@ -60,10 +60,6 @@ function Game() {
 
   const cancelSubmit = () => {
     setSubmitScorePopup(false);
-  };
-
-  const changeUsername = (input) => {
-    setUsername(input);
   };
 
   const showScorePopup = () => {
@@ -158,5 +154,10 @@ function Game() {
     </>
   );
 }
+
+Game.propTypes = {
+  username: PropType.string.isRequired,
+  changeUsername: PropType.func.isRequired,
+};
 
 export default Game;
