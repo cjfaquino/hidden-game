@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 
 function Popup({ styles, items, checkCoords, coords, setItemFound }) {
   const handleClick = (item) => () => {
-    if (checkCoords(item, coords)) {
-      setItemFound(item.name);
+    const { name } = item;
+    if (checkCoords(name, coords)) {
+      setItemFound(name);
     }
   };
 

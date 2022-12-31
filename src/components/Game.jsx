@@ -99,10 +99,15 @@ function Game() {
     setItemsArr(newArr);
   };
 
-  const checkCoords = (item, position) => {
-    const { x: itemX, y: itemY } = item;
+  const checkCoords = (itemName, position) => {
+    if (dbLevel === null)
+      return console.error('Coult not connect to firestore');
+
+    const { items: dbItems } = dbLevel;
+    const [dbItem] = dbItems.filter((it) => it.name === itemName);
+    const { x: itemX, y: itemY } = dbItem;
     const { x, y } = position;
-    const distance = 3;
+    const distance = 3; // target area free play
     if (
       x >= itemX - distance &&
       x <= itemX + distance &&
