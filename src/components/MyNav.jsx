@@ -23,13 +23,15 @@ function MyNav({ duration, items }) {
 
           {items.map((item) => (
             <li
-              className={!item.found ? '' : 'found'}
+              className={!item.found ? 'nav-item' : 'nav-item found'}
               key={crypto.randomUUID()}
             >
               {item.name}
             </li>
           ))}
-          <li>{duration !== null && <Stopwatch duration={duration} />}</li>
+          <li className='nav-time'>
+            {duration !== null && <Stopwatch duration={duration} />}
+          </li>
 
           <li className='leaderboard-link'>
             {!location.pathname.endsWith('leaderboard') && (
