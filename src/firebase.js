@@ -65,7 +65,7 @@ export const addToScoresDB = async (score, levelName) => {
 
 export const getScores = async (levelName) => {
   const q = query(
-    collection(db, levelName),
+    collection(db, 'leaderboard', levelName, 'scores'),
     orderBy('score', 'asc'),
     limit(10)
   );
