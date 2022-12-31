@@ -8,6 +8,7 @@ import {
   limit,
   setDoc,
   doc,
+  getDoc,
   getDocs,
   query,
 } from 'firebase/firestore';
@@ -80,25 +81,26 @@ export const getScores = async (levelName) => {
   return scores;
 };
 
-// const levelConverter = {
-//   toFirestore: (level) => ({
-//     name: level.name,
-//     imgUrl: level.imgUrl,
-//     thumbUrl: level.thumbUrl,
-//     items: level.items,
-//   }),
-//   fromFirestore: (snapshot, options) => {
-//     const data = snapshot.data(options);
-//     return new Level(
-//       data.name,
-//       data.imgUrl,
-//       data.thumbUrl,
-//       data.items[0],
-//       data.items[1],
-//       data.items[2]
-//     );
-//   },
-// };
+const levelConverter = {
+  toFirestore: (level) => ({
+    name: level.name,
+    imgUrl: level.imgUrl,
+    thumbUrl: level.thumbUrl,
+    items: level.items,
+  }),
+  fromFirestore: (snapshot, options) => {
+    const data = snapshot.data(options);
+    return new Level(
+      data.name.long,
+      data.name.short,
+      data.imgUrl,
+      data.thumbUrl,
+      data.items[0],
+      data.items[1],
+      data.items[2]
+    );
+  },
+};
 
 // const addLevelToDb = async (level) => {
 //   try {
@@ -112,3 +114,14 @@ export const getScores = async (levelName) => {
 // };
 
 // levels.forEach((level) => addLevelToDb(level));
+
+export const getLevelFromDb = async (levelName) => {
+  const ref = doc(db, 'level', levelName).withConverter(levelConverter);
+  const docSnap = await getDoc(ref);
+
+  if (docSnap.exists()) {
+    return docSnap.data();
+  }
+  // doc.data() will be undefined in this case
+  console.log('No such document!');
+};

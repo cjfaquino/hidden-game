@@ -7,7 +7,7 @@ import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
 
-import { addToScoresDB } from '../firebase';
+import { addToScoresDB, getLevelFromDb } from '../firebase';
 
 function Game() {
   const navigate = useNavigate();
@@ -23,10 +23,15 @@ function Game() {
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
   const [username, setUsername] = useState('Anonymous');
   const [itemsArr, setItemsArr] = useState(items);
+  const [dbLevel, setDbLevel] = useState(null);
+
+  useEffect(() => {
+    getLevelFromDb(level.name.short).then((data) => setDbLevel(data));
+  }, []);
 
   useEffect(() => {
     let interval;
-    if (isActive) {
+    if (isActive && dbLevel) {
       interval = setInterval(() => {
         setDuration((x) => x + 1);
       }, 100);
@@ -35,7 +40,7 @@ function Game() {
     return () => {
       clearInterval(interval);
     };
-  }, [isActive]);
+  }, [isActive, dbLevel]);
 
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
