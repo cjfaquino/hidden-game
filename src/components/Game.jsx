@@ -1,10 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropType from 'prop-types';
-import usePopupSize from '../utils/usePopupSize';
 import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
