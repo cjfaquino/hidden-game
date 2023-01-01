@@ -14,7 +14,7 @@ const fancyTime = (duration) => {
   let time = `${mm}:${ss}.${S}`;
 
   if (hh > 0) {
-    time = `${hh}:${mm}:${ss}.${S}`;
+    time = `59:59.9`;
   }
   return time;
 };
