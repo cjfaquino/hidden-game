@@ -91,26 +91,6 @@ function Game({ username, changeUsername }) {
     return false;
   };
 
-  const setPopupBoundaries = (popupSize, coords) => {
-    const popXPerc = (popupSize.x / coords.clientWidth) * 100;
-    const popYPerc = (popupSize.y / window.innerHeight) * 100;
-    const clientYPerc = (coords.clientY / window.innerHeight) * 100;
-
-    let newCoords = coords;
-    if (popupSize.x && popupSize.y) {
-      if (coords.x + popXPerc > 100) {
-        const newX = coords.x - popXPerc;
-        newCoords = { ...newCoords, x: newX };
-      }
-      if (clientYPerc + popYPerc > 100) {
-        const newY = coords.y - (popupSize.y / coords.clientHeight) * 100;
-        newCoords = { ...newCoords, y: newY };
-      }
-    }
-
-    return newCoords;
-  };
-
   const handlePopup = (e) => {
     const coords = getCoords(e);
 
@@ -120,7 +100,6 @@ function Game({ username, changeUsername }) {
         checkCoords={checkCoords}
         setItemFound={setItemFound}
         coords={coords}
-        setPopupBoundaries={setPopupBoundaries}
       />
     );
 

@@ -1,16 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import PropTypes from 'prop-types';
 import usePopupSize from '../utils/usePopupSize';
 
-function Popup({
-  items,
-  checkCoords,
-  coords,
-  setPopupBoundaries,
-  setItemFound,
-}) {
+function Popup({ items, checkCoords, coords, setItemFound }) {
+  const [styles, setStyles] = useState({});
   const popupRef = useRef();
-  const popupSize = usePopupSize(popupRef);
+  const currentPopupSize = usePopupSize(popupRef);
+
   const handleClick = (item) => () => {
     const { name } = item;
     if (checkCoords(name, coords)) {
@@ -18,11 +14,35 @@ function Popup({
     }
   };
 
-  const { x, y } = setPopupBoundaries(popupSize, coords);
-  const styles = {
-    top: `${y}%`,
-    left: `${x}%`,
+  const setPopupBoundaries = (popupSize, currentCoords) => {
+    const popXPerc = (popupSize.x / currentCoords.clientWidth) * 100;
+    const popYPerc = (popupSize.y / window.innerHeight) * 100;
+    const clientYPerc = (currentCoords.clientY / window.innerHeight) * 100;
+
+    let newCoords = currentCoords;
+    if (popupSize.x && popupSize.y) {
+      if (currentCoords.x + popXPerc > 100) {
+        const newX = currentCoords.x - popXPerc;
+        newCoords = { ...newCoords, x: newX };
+      }
+      if (clientYPerc + popYPerc > 100) {
+        const newY =
+          currentCoords.y - (popupSize.y / currentCoords.clientHeight) * 100;
+        newCoords = { ...newCoords, y: newY };
+      }
+    }
+
+    return newCoords;
   };
+
+  useEffect(() => {
+    const { x, y } = setPopupBoundaries(currentPopupSize, coords);
+    const newStyles = {
+      top: `${y}%`,
+      left: `${x}%`,
+    };
+    setStyles(newStyles);
+  }, [currentPopupSize]);
 
   return (
     <div className='popup' style={styles} ref={popupRef}>
@@ -51,11 +71,13 @@ Popup.propTypes = {
     })
   ).isRequired,
   checkCoords: PropTypes.func.isRequired,
-  setPopupBoundaries: PropTypes.func.isRequired,
   setItemFound: PropTypes.func.isRequired,
   coords: PropTypes.shape({
     x: PropTypes.number,
     y: PropTypes.number,
+    clientWidth: PropTypes.number,
+    clientHeight: PropTypes.number,
+    clientY: PropTypes.number,
   }).isRequired,
 };
 
