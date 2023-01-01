@@ -4,6 +4,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import PropType from 'prop-types';
+import useStopwatch from '../utils/useStopwatch';
 import SubmitScorePopup from './SubmitScorePopup';
 import MyNav from './MyNav';
 import Popup from './Popup';
@@ -17,29 +18,11 @@ function Game({ username, changeUsername }) {
   const level = location.state;
   const { imgUrl, items } = level;
 
-  const [duration, setDuration] = useState(0);
-  const [isActive, setIsActive] = useState(false);
+  const [duration, isActive, setIsActive] = useStopwatch(false);
   const [popup, setPopup] = useState(null);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
   const [itemsArr, setItemsArr] = useState(items);
   const [dbLevel, setDbLevel] = useState(null);
-
-  useEffect(() => {
-    getLevelFromDb(level.name.short).then((data) => setDbLevel(data));
-  }, []);
-
-  useEffect(() => {
-    let interval;
-    if (isActive && dbLevel) {
-      interval = setInterval(() => {
-        setDuration((x) => x + 1);
-      }, 100);
-    }
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, [isActive, dbLevel]);
 
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
@@ -65,14 +48,8 @@ function Game({ username, changeUsername }) {
     setSubmitScorePopup(true);
   };
 
-  useEffect(() => {
-    if (checkIfAllFound()) {
-      setIsActive(false);
-      showScorePopup();
-    }
-  }, [itemsArr]);
-
   const handleLoad = () => {
+    // when img finishes loading
     setIsActive(true);
   };
 
@@ -155,6 +132,23 @@ function Game({ username, changeUsername }) {
     if (!popup) setPopup(div);
     else if (popup) setPopup(null);
   };
+
+  useEffect(() => {
+    getLevelFromDb(level.name.short).then((data) => setDbLevel(data));
+  }, []);
+
+  useEffect(() => {
+    if (isActive && dbLevel) {
+      setIsActive(true);
+    }
+  }, [isActive, dbLevel]);
+
+  useEffect(() => {
+    if (checkIfAllFound()) {
+      setIsActive(false);
+      showScorePopup();
+    }
+  }, [itemsArr]);
 
   return (
     <>
