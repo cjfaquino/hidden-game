@@ -181,33 +181,71 @@ nav button:hover {
 }
 
 .score-submit-popup {
-  padding: 20px;
+  padding: 15px;
   background-color: white;
   border-radius: 7px;
   width: 300px;
   height: fit-content;
   z-index: 10;
-  text-align: center;
+}
+
+.score-submit-popup button,
+.score-submit-popup input {
+  border-radius: 5px;
+}
+
+.score-submit-popup label {
+  font-size: 0.8rem;
 }
 
 .score-message {
   font-size: 1.3rem;
+  margin-bottom: 15px;
 }
 
 .score-time {
   font-weight: 600;
 }
 
-.score-submit-popup input {
+#input-username {
   width: 100%;
+  padding: 15px 5px;
+  font-size: 1rem;
+  border: solid 1px rgb(207, 207, 207);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
 }
 
 .submit-btns {
+  margin-top: 15px;
   display: flex;
+  justify-content: flex-end;
+  gap: 15px;
 }
 
 .submit-btns button {
-  width: 100%;
+  font-size: 1rem;
+  transition: all 0.15s ease-in-out;
+}
+
+.btn-cancel-submit {
+  background-color: transparent;
+  border: none;
+}
+
+.btn-cancel-submit:hover {
+  color: red;
+}
+
+.btn-submit {
+  padding: 10px;
+  border: none;
+  background-color: rgb(88, 169, 255);
+  color: white;
+  font-weight: 700;
+}
+
+.btn-submit:hover {
+  background-color: rgb(14, 130, 255);
 }
 
 /* Leaderboard */

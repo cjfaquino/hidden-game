@@ -18,20 +18,24 @@ function SubmitScorePopup({ duration, buttonHandlers, name }) {
           You finished in{' '}
           <span className='score-time'>{fancyTime(duration)}s</span>
         </div>
-        <label htmlFor='username'>
-          Enter a username
+        <label htmlFor='input-username'>
+          Enter a name to submit score
           <input
-            id='username'
+            id='input-username'
             type='text'
             value={name.username}
             onChange={handleChange}
           />
         </label>
         <div className='submit-btns'>
-          <button type='button' onClick={cancelSubmit}>
+          <button
+            type='button'
+            className='btn-cancel-submit'
+            onClick={cancelSubmit}
+          >
             Cancel
           </button>
-          <button type='button' onClick={submitScore}>
+          <button type='button' className='btn-submit' onClick={submitScore}>
             Submit
           </button>
         </div>
