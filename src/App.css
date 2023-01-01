@@ -14,13 +14,17 @@ img.loaded {
   transition: filter 0.4s linear;
 }
 
+header,
+nav {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  z-index: 10;
+}
+
 nav {
   padding: 20px;
   position: sticky;
   top: 0;
   background-color: white;
-  z-index: 10;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
 nav a {
@@ -76,6 +80,17 @@ nav button:hover {
 }
 
 /* Home */
+
+header {
+  background-color: white;
+}
+
+header h1 {
+  max-width: 1400px;
+  font-weight: 300;
+  margin: 0 auto;
+  padding: 20px;
+}
 
 .home {
   padding: 40px 20px;
@@ -300,9 +315,14 @@ nav button:hover {
 }
 
 @media (max-width: 1000px) {
-  .app {
+  .app:has(.leaderboard) {
     background-color: white;
   }
+
+  .home {
+    padding: 20px;
+  }
+
   .game-img-container {
     top: -30px;
   }
@@ -351,7 +371,7 @@ nav button:hover {
   }
 
   .game-img-container {
-    top: -20px;
+    top: -5vw;
   }
 
   .home {
