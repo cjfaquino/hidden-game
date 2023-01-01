@@ -259,7 +259,7 @@ nav button:hover {
   height: 100%;
 }
 
-.leaderboard-grid {
+.leaderboard {
   background-color: white;
   border-radius: 7px;
   overflow: hidden;
@@ -279,13 +279,18 @@ nav button:hover {
 }
 
 .scoreboard-grid {
+  height: 100%;
+  width: 100%;
+}
+
+.scoreboard-item {
+  padding: 0 20px;
   display: grid;
-  grid-template-columns: 40px 300px 200px min-content;
+  align-items: center;
+  grid-template-columns: 40px 320px 150px min-content;
   grid-template-rows: 60px;
   grid-auto-rows: 45px;
   font-size: 1.3rem;
-  height: 100%;
-  width: 100%;
 }
 
 @media (max-width: 1400px) {
@@ -295,12 +300,48 @@ nav button:hover {
 }
 
 @media (max-width: 1000px) {
+  .app {
+    background-color: white;
+  }
   .game-img-container {
     top: -30px;
   }
+
+  .leaderboard {
+    background-color: transparent;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    min-height: 40vh;
+  }
+
+  .board-img-container {
+    display: none;
+  }
+
+  .leaderboard,
+  .top10 {
+    width: 100%;
+  }
+
+  .top10 h2 {
+    font-size: 3vw;
+  }
+
+  .scoreboard-item {
+    font-size: 2.5vw;
+    grid-template-columns: 4vw 4fr repeat(2, 1fr);
+    grid-template-rows: 6vw;
+    grid-auto-rows: 4.5vw;
+    border-bottom: rgb(208, 208, 208) 1px solid;
+  }
+
+  .scoreboard-item:last-child {
+    border-bottom: none;
+  }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 800px) {
   .home-link {
     margin: 0;
   }
@@ -316,5 +357,19 @@ nav button:hover {
   .home {
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 20px;
+  }
+}
+
+@media (max-width: 600px) {
+  .top10 h2 {
+    font-size: 5vw;
+  }
+
+  .scoreboard-item {
+    font-size: 4vw;
+    justify-content: center;
+    grid-template-columns: 5vw 1.5fr repeat(2, 1fr);
+    grid-template-rows: 9vw;
+    grid-auto-rows: 8vw;
   }
 }

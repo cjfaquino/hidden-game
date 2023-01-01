@@ -11,14 +11,14 @@ function LeaderboardItem({ obj, index }) {
   } = obj;
 
   return (
-    <>
+    <div className='scoreboard-item'>
       <div>{index + 1}.</div>
       <div className='scoreboard-user'>{user}</div>
       {score > 0 && <div className='scoreboard-score'>{fancyTime(score)}s</div>}
       {seconds > 0 && (
         <div className='scoreboard-date'>{formatDate(seconds)}</div>
       )}
-    </>
+    </div>
   );
 }
 
