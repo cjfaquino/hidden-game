@@ -19,7 +19,7 @@ function Game({ username, changeUsername }) {
 
   const [duration, setDuration] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [showPopup, setShowPopup] = useState(false);
+  const [popup, setPopup] = useState(null);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
   const [itemsArr, setItemsArr] = useState(items);
   const [dbLevel, setDbLevel] = useState(null);
@@ -152,8 +152,8 @@ function Game({ username, changeUsername }) {
       />
     );
 
-    if (!showPopup) setShowPopup(div);
-    else if (showPopup) setShowPopup(null);
+    if (!popup) setPopup(div);
+    else if (popup) setPopup(null);
   };
 
   return (
@@ -162,7 +162,7 @@ function Game({ username, changeUsername }) {
       <div className='game'>
         <div className='game-img-container' onClick={handlePopup}>
           <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
-          {showPopup}
+          {popup}
         </div>
         {submitScorePopup && (
           <SubmitScorePopup
