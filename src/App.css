@@ -66,6 +66,8 @@ nav button:hover {
   background-color: white;
 }
 
+/* Home */
+
 .home {
   padding: 40px 20px;
   max-width: 1400px;
@@ -92,6 +94,8 @@ nav button:hover {
   width: 100%;
 }
 
+/* Game */
+
 .game {
   display: flex;
   flex-direction: column;
@@ -101,14 +105,16 @@ nav button:hover {
 .game-img-container {
   position: relative;
   top: -10vh;
-  width: 100vw;
+  max-width: 100%;
+  outline: 10px solid white;
+  outline-offset: -10px;
 }
 
 .game-img-container img {
   width: 100%;
 }
 
-/* popup */
+/* character select popup && score popup */
 
 .popup {
   position: absolute;
