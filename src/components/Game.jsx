@@ -5,6 +5,7 @@ import PropType from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { addToScoresDB, getLevelFromDb } from '../firebase';
+import getCoords from '../utils/getCoords';
 import useStopwatch from '../utils/useStopwatch';
 import SubmitScorePopup from './SubmitScorePopup';
 import Score from './Score';
@@ -46,22 +47,6 @@ function Game({ username, changeUsername }) {
   const handleLoad = () => {
     // when img finishes loading
     setIsActive(true);
-  };
-
-  const getCoords = (e) => {
-    const x = e.pageX - e.currentTarget.offsetLeft;
-    const y = e.pageY - e.currentTarget.offsetTop;
-
-    const xPerc = (x / e.currentTarget.clientWidth) * 100;
-    const yPerc = (y / e.currentTarget.clientHeight) * 100;
-
-    return {
-      x: xPerc,
-      y: yPerc,
-      clientWidth: e.currentTarget.clientWidth,
-      clientHeight: e.currentTarget.clientHeight,
-      clientY: e.clientY,
-    };
   };
 
   const setItemFound = (name) => {
