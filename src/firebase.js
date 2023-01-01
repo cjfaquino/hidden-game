@@ -84,21 +84,11 @@ export const getScores = async (levelName) => {
 const levelConverter = {
   toFirestore: (level) => ({
     name: level.name,
-    imgUrl: level.imgUrl,
-    thumbUrl: level.thumbUrl,
     items: level.items,
   }),
   fromFirestore: (snapshot, options) => {
     const data = snapshot.data(options);
-    return new Level(
-      data.name.long,
-      data.name.short,
-      data.imgUrl,
-      data.thumbUrl,
-      data.items[0],
-      data.items[1],
-      data.items[2]
-    );
+    return new Level(data.name.long, data.name.short, data.items);
   },
 };
 
