@@ -1,14 +1,15 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import PropType from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import PropType from 'prop-types';
+import { addToScoresDB, getLevelFromDb } from '../firebase';
 import useStopwatch from '../utils/useStopwatch';
 import SubmitScorePopup from './SubmitScorePopup';
+import Score from './Score';
 import MyNav from './MyNav';
 import Popup from './Popup';
-import { addToScoresDB, getLevelFromDb } from '../firebase';
 
 function Game({ username, changeUsername }) {
   const navigate = useNavigate();
@@ -27,13 +28,7 @@ function Game({ username, changeUsername }) {
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
   const submitScore = () => {
-    // const score = new Score(duration, username);
-    const score = {
-      date: new Date(),
-      user: username,
-      score: duration,
-      level: level.name.short,
-    };
+    const score = new Score(duration, username, level.name.short);
 
     addToScoresDB(score, level.name.short);
 
