@@ -8,6 +8,7 @@ import { addToScoresDB, getLevelFromDb } from '../firebase';
 import getCoords from '../utils/getCoords';
 import useStopwatch from '../utils/useStopwatch';
 import SubmitScorePopup from './SubmitScorePopup';
+import ProgressiveImg from './ProgressiveImg';
 import Score from './Score';
 import MyNav from './MyNav';
 import Popup from './Popup';
@@ -18,7 +19,7 @@ function Game({ username, changeUsername }) {
   if (location.state === null) navigate('/');
 
   const level = location.state;
-  const { imgUrl, items } = level;
+  const { imgUrl, items, loadingUrl } = level;
 
   const [duration, isActive, setIsActive] = useStopwatch(false);
   const [popup, setPopup] = useState(null);
@@ -114,7 +115,14 @@ function Game({ username, changeUsername }) {
       <MyNav duration={duration} items={itemsArr} />
       <div className='game'>
         <div className='game-img-container' onClick={handlePopup}>
-          <img id='game-image' src={imgUrl} alt='snes' onLoad={handleLoad} />
+          <ProgressiveImg
+            placeholderSrc={loadingUrl}
+            src={imgUrl}
+            alt={level.name.long}
+            id='game-image'
+            handleLoad={handleLoad}
+            dbLevel={dbLevel}
+          />
           {popup}
         </div>
         {submitScorePopup && (

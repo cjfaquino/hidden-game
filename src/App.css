@@ -5,6 +5,15 @@
   justify-content: space-between;
 }
 
+img.loading {
+  filter: blur(20px);
+}
+
+img.loaded {
+  filter: blur(0px);
+  transition: filter 0.4s linear;
+}
+
 nav {
   padding: 20px;
   position: sticky;
@@ -83,6 +92,7 @@ nav button:hover {
   border-radius: 10px;
   overflow: hidden;
   transition: transform 0.1s ease-in-out;
+  z-index: 1;
 }
 
 .home-img-container:hover {
@@ -90,6 +100,7 @@ nav button:hover {
 }
 
 .home-img-container img {
+  border-radius: 10px;
   height: 100%;
   width: 100%;
 }
@@ -105,12 +116,12 @@ nav button:hover {
 .game-img-container {
   position: relative;
   top: -10vh;
-  max-width: 100%;
+  min-width: 100vw;
   outline: 10px solid white;
   outline-offset: -10px;
 }
 
-.game-img-container img {
+#game-image {
   width: 100%;
 }
 
