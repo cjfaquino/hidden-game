@@ -19,7 +19,7 @@ const useLevelFromDB = (levelName) => {
           setLevel(docSnap.data());
         }
         // doc.data() will be undefined in this case
-        console.log('No such document!');
+        else console.log('No such document!');
 
         setLoading(false);
       } catch (e) {
