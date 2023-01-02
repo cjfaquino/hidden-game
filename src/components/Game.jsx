@@ -4,10 +4,10 @@
 import PropType from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { getLevelFromDb } from '../firebase';
 import addToScoresDB from '../utils/addToScoreDB';
 import getCoords from '../utils/getCoords';
 import useStopwatch from '../utils/useStopwatch';
+import useLevelFromDB from '../utils/useLevelFromDB';
 import SubmitScorePopup from './SubmitScorePopup';
 import ProgressiveImg from './ProgressiveImg';
 import Score from './Score';
@@ -20,14 +20,19 @@ function Game({ username, changeUsername }) {
   if (location.state === null) navigate('/');
 
   const level = location.state;
-  const { imgUrl, items, loadingUrl } = level;
+  const {
+    imgUrl,
+    items,
+    loadingUrl,
+    name: { short },
+  } = level;
 
   const [duration, setIsActive] = useStopwatch();
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [popup, setPopup] = useState(null);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
   const [itemsArr, setItemsArr] = useState(items);
-  const [dbLevel, setDbLevel] = useState(null);
+  const [dbLevel, dBlevelLoading] = useLevelFromDB(short);
 
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
@@ -96,15 +101,11 @@ function Game({ username, changeUsername }) {
   };
 
   useEffect(() => {
-    getLevelFromDb(level.name.short).then((data) => setDbLevel(data));
-  }, []);
-
-  useEffect(() => {
     if (dbLevel && isImgLoaded) {
       // when img finished loading && connect to db
       setIsActive(true);
     }
-  }, [dbLevel, isImgLoaded]);
+  }, [dBlevelLoading, isImgLoaded]);
 
   useEffect(() => {
     if (checkIfAllFound()) {
