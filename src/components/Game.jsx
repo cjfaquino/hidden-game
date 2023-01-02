@@ -4,7 +4,8 @@
 import PropType from 'prop-types';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { addToScoresDB, getLevelFromDb } from '../firebase';
+import { getLevelFromDb } from '../firebase';
+import addToScoresDB from '../utils/addToScoreDB';
 import getCoords from '../utils/getCoords';
 import useStopwatch from '../utils/useStopwatch';
 import SubmitScorePopup from './SubmitScorePopup';

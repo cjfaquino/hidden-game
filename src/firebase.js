@@ -2,18 +2,11 @@
 import { initializeApp } from 'firebase/app';
 import {
   getFirestore,
-  collection,
-  addDoc,
-  orderBy,
-  limit,
   doc,
   getDoc,
-  getDocs,
-  query,
   // setDoc,
 } from 'firebase/firestore';
 
-import Score from './components/Score';
 import Level from './components/Level';
 // import levels from './components/levels';
 
@@ -35,34 +28,6 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
-
-const scoreConverter = {
-  toFirestore: (score) => ({
-    user: score.user,
-    score: score.score,
-    level: score.level,
-    date: score.date,
-  }),
-  fromFirestore: (snapshot, options) => {
-    const data = snapshot.data(options);
-    return new Score(data.user, data.score, data.level, data.date);
-  },
-};
-
-export const addToScoresDB = async (score, levelName) => {
-  try {
-    const docRef = collection(
-      db,
-      'leaderboard',
-      levelName,
-      'scores'
-    ).withConverter(scoreConverter);
-
-    await addDoc(docRef, score);
-  } catch (e) {
-    console.error('Error adding document: ', e);
-  }
-};
 
 const levelConverter = {
   toFirestore: (level) => ({
