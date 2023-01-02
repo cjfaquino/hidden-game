@@ -112,6 +112,8 @@ header h1 {
 
 .home-img-container:hover {
   transform: scale(1.03);
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
+    rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
 .home-img-container img {
@@ -324,6 +326,10 @@ header h1 {
   .game-img-container {
     top: -40px;
   }
+
+  .home {
+    gap: 20px;
+  }
 }
 
 @media (max-width: 1000px) {
@@ -340,15 +346,24 @@ header h1 {
   }
 
   .leaderboard {
+    margin-top: 0;
     background-color: transparent;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     width: fit-content;
     min-height: 40vh;
+    border-radius: 0;
   }
 
   .board-img-container {
-    display: none;
+    max-width: 100vw;
+    height: 40vw;
+  }
+
+  .board-img-container img {
+    width: 100%;
+    object-fit: cover;
   }
 
   .leaderboard,
