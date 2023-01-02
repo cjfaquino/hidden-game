@@ -9,7 +9,7 @@ const scoreConverter = {
   }),
   fromFirestore: (snapshot, options) => {
     const data = snapshot.data(options);
-    return new Score(data.user, data.score, data.level, data.date);
+    return new Score(data.score, data.user, data.level, data.date);
   },
 };
 

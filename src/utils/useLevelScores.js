@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { query, collection, orderBy, limit, getDocs } from 'firebase/firestore';
 import { db } from '../firebase';
+import scoreConverter from './scoreConverter';
 
 const useLevelScores = (levelName) => {
   const [scores, setScores] = useState([]);
@@ -9,7 +10,9 @@ const useLevelScores = (levelName) => {
   useEffect(() => {
     setLoading(true);
     const q = query(
-      collection(db, 'leaderboard', levelName, 'scores'),
+      collection(db, 'leaderboard', levelName, 'scores').withConverter(
+        scoreConverter
+      ),
       orderBy('score', 'asc'),
       limit(10)
     );
