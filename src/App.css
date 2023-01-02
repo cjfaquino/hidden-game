@@ -295,17 +295,16 @@ header h1 {
 }
 
 .scoreboard-grid {
-  height: 100%;
+  height: min-content;
   width: 100%;
 }
 
 .scoreboard-item {
-  padding: 0 20px;
+  padding: 0 15px;
   display: grid;
   align-items: center;
-  grid-template-columns: 40px 320px 150px min-content;
-  grid-template-rows: 60px;
-  grid-auto-rows: 45px;
+  grid-template-columns: 40px 320px repeat(2, 1fr);
+  grid-template-rows: 50px;
   font-size: 1.3rem;
 }
 
@@ -314,6 +313,11 @@ header h1 {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.scoreboard-date,
+.label-scoreboard-date {
+  text-align: right;
 }
 
 @media (max-width: 1400px) {
@@ -358,7 +362,7 @@ header h1 {
 
   .scoreboard-item {
     font-size: 2.5vw;
-    grid-template-columns: 4vw 4fr repeat(2, 1fr);
+    grid-template-columns: 4vw 3fr 1fr 1fr;
     grid-template-rows: 6vw;
     grid-auto-rows: 4.5vw;
     border-bottom: rgb(208, 208, 208) 1px solid;
@@ -396,7 +400,7 @@ header h1 {
   .scoreboard-item {
     font-size: 4vw;
     justify-content: center;
-    grid-template-columns: 5vw 1.5fr repeat(2, 1fr);
+    grid-template-columns: 5vw 1fr 0.5fr 1fr;
     grid-template-rows: 9vw;
     grid-auto-rows: 8vw;
   }
