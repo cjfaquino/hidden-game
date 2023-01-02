@@ -150,6 +150,7 @@ header h1 {
   width: 130px;
   border-radius: 5px;
   overflow: hidden;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .popup li {
@@ -204,6 +205,7 @@ header h1 {
   width: 300px;
   height: fit-content;
   z-index: 10;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 .score-submit-popup button,
