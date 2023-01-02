@@ -25,6 +25,7 @@ function SubmitScorePopup({ duration, buttonHandlers, name }) {
             type='text'
             value={name.username}
             onChange={handleChange}
+            maxLength='20'
           />
         </label>
         <div className='submit-btns'>
