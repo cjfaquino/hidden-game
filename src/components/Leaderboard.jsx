@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import levels from './levels';
 import MyNav from './MyNav';
-import { getScores } from '../firebase';
+import useLevelScores from '../utils/useLevelScores';
 import LeaderboardItem from './LeaderboardItem';
 import Loading from './Loading/Loading';
 
@@ -10,8 +10,8 @@ function Leaderboard() {
   const params = useParams();
   const location = useLocation();
   const [currentItem, setCurrentItem] = useState(null);
-  const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [scores, isScoresLoading] = useLevelScores(params.name);
 
   const getLevel = (name) => {
     const [filtered] = levels.filter((level) => level.name.short === name);
@@ -29,14 +29,12 @@ function Leaderboard() {
   }, []);
 
   useEffect(() => {
-    if (currentItem !== null) {
+    if (currentItem !== null && !isScoresLoading) {
       (async () => {
-        const scoresArr = await getScores(currentItem.name.short);
-        setScores(scoresArr);
         setLoading(false);
       })();
     }
-  }, [currentItem]);
+  }, [currentItem, isScoresLoading]);
 
   return (
     <>
