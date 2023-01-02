@@ -1,14 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import {
-  getFirestore,
-  doc,
-  getDoc,
-  // setDoc,
-} from 'firebase/firestore';
-
-import Level from './components/Level';
-// import levels from './components/levels';
+import { getFirestore } from 'firebase/firestore';
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -28,27 +20,3 @@ const app = initializeApp(firebaseConfig);
 
 // Initialize Cloud Firestore and get a reference to the service
 export const db = getFirestore(app);
-
-// const addLevelToDb = async (level) => {
-//   try {
-//     const ref = doc(db, 'level', level.name.short).withConverter(
-//       levelConverter
-//     );
-//     await setDoc(ref, level);
-//   } catch (e) {
-//     console.error('Error adding document: ', e);
-//   }
-// };
-
-// levels.forEach((level) => addLevelToDb(level));
-
-// export const getLevelFromDb = async (levelName) => {
-//   const ref = doc(db, 'level', levelName).withConverter(levelConverter);
-//   const docSnap = await getDoc(ref);
-
-//   if (docSnap.exists()) {
-//     return docSnap.data();
-//   }
-//   // doc.data() will be undefined in this case
-//   console.log('No such document!');
-// };
