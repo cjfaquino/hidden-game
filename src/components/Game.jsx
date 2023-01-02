@@ -21,7 +21,8 @@ function Game({ username, changeUsername }) {
   const level = location.state;
   const { imgUrl, items, loadingUrl } = level;
 
-  const [duration, isActive, setIsActive] = useStopwatch(false);
+  const [duration, setIsActive] = useStopwatch();
+  const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [popup, setPopup] = useState(null);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
   const [itemsArr, setItemsArr] = useState(items);
@@ -47,7 +48,7 @@ function Game({ username, changeUsername }) {
 
   const handleLoad = () => {
     // when img finishes loading
-    setIsActive(true);
+    setIsImgLoaded(true);
   };
 
   const setItemFound = (name) => {
@@ -98,10 +99,11 @@ function Game({ username, changeUsername }) {
   }, []);
 
   useEffect(() => {
-    if (isActive && dbLevel) {
+    if (dbLevel && isImgLoaded) {
+      // when img finished loading && connect to db
       setIsActive(true);
     }
-  }, [isActive, dbLevel]);
+  }, [dbLevel, isImgLoaded]);
 
   useEffect(() => {
     if (checkIfAllFound()) {

@@ -1,23 +1,30 @@
 import { useState, useEffect } from 'react';
 
-const useStopwatch = (active) => {
+const useStopwatch = () => {
+  const [startTime, setStartTime] = useState(null);
+  const [isActive, setIsActive] = useState(false);
   const [duration, setDuration] = useState(0);
-  const [isActive, setIsActive] = useState(active);
+
+  useEffect(() => {
+    if (isActive) {
+      setStartTime(new Date().getTime());
+    }
+  }, [isActive]);
 
   useEffect(() => {
     let interval;
     if (isActive) {
       interval = setInterval(() => {
-        setDuration((x) => x + 1);
-      }, 100);
+        setDuration(new Date().getTime() - startTime);
+      }, 10);
     }
 
     return () => {
       clearInterval(interval);
     };
-  }, [isActive]);
+  }, [startTime, isActive]);
 
-  return [duration, isActive, setIsActive];
+  return [duration, setIsActive];
 };
 
 export default useStopwatch;
