@@ -32,6 +32,7 @@ nav ul {
   margin: 0 auto;
   max-width: 1430px;
   display: flex;
+  flex-shrink: 0;
   gap: 20px;
 }
 
@@ -54,6 +55,26 @@ nav button:hover {
 
 .home-link {
   margin-right: 50px;
+}
+
+.home-link a,
+.leaderboard-link a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home-link a {
+  width: 18px;
+}
+
+.leaderboard-link a {
+  width: 24px;
+}
+
+.nav-link-img {
+  height: 100%;
+  width: 100%;
 }
 
 .leaderboard-link {
@@ -438,5 +459,15 @@ header h1 {
     grid-template-columns: 5vw 1fr 0.5fr 1fr;
     grid-template-rows: 9vw;
     grid-auto-rows: 8vw;
+  }
+}
+
+@media (max-width: 400px) {
+  nav ul {
+    gap: 10px;
+  }
+
+  .leaderboard-link a {
+    width: 20px;
   }
 }

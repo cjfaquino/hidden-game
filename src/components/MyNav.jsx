@@ -8,6 +8,8 @@ import {
 } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Stopwatch from './Stopwatch';
+import homeIcon from '../assets/svgs/home.svg';
+import leaderboardIcon from '../assets/svgs/leaderboard.svg';
 
 function MyNav({ duration, items }) {
   const navigate = useNavigate();
@@ -18,7 +20,9 @@ function MyNav({ duration, items }) {
       <nav>
         <ul>
           <li className='home-link'>
-            <Link to='/'>Home</Link>
+            <Link to='/'>
+              <img className='nav-link-img' src={homeIcon} alt='Home' />
+            </Link>
           </li>
 
           {items.map((item) => (
@@ -35,7 +39,13 @@ function MyNav({ duration, items }) {
 
           <li className='leaderboard-link'>
             {!location.pathname.endsWith('leaderboard') && (
-              <Link to={`/${params.name}/leaderboard`}>Leaderboard</Link>
+              <Link to={`/${params.name}/leaderboard`}>
+                <img
+                  className='nav-link-img'
+                  src={leaderboardIcon}
+                  alt='Leaderboard'
+                />
+              </Link>
             )}
             {location.pathname.endsWith('leaderboard') && (
               <button type='button' onClick={() => navigate(-1)}>
