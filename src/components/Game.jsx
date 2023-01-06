@@ -14,7 +14,7 @@ import Score from './Score';
 import MyNav from './MyNav';
 import Popup from './Popup';
 
-function Game({ username, changeUsername }) {
+function Game({ username, setUsername }) {
   const navigate = useNavigate();
   const location = useLocation();
   if (location.state === null) navigate('/');
@@ -31,17 +31,20 @@ function Game({ username, changeUsername }) {
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [popup, setPopup] = useState(null);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
+  const [sendingScores, setSendingScores] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
   const [itemsArr, setItemsArr] = useState(items);
   const [dbLevel, dBlevelLoading] = useLevelFromDB(short);
 
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
-  const submitScore = () => {
+  const submitScore = async () => {
     const score = new Score(duration, username, level.name.short);
-
-    addToScoresDB(score, level.name.short);
-
-    navigate(`leaderboard`, { state: level });
+    setSendingScores(true);
+    const ableToAdd = await addToScoresDB(score, level.name.short);
+    setSendingScores(false);
+    if (ableToAdd) navigate(`leaderboard`, { state: level });
+    else setSubmitError('Could not submit score');
   };
 
   const cancelSubmit = () => {
@@ -133,7 +136,9 @@ function Game({ username, changeUsername }) {
           <SubmitScorePopup
             duration={duration}
             buttonHandlers={{ submitScore, cancelSubmit }}
-            name={{ username, changeUsername }}
+            name={{ username, setUsername }}
+            sendingScores={sendingScores}
+            errorHandlers={{ submitError, setSubmitError }}
           />
         )}
       </div>
@@ -143,7 +148,7 @@ function Game({ username, changeUsername }) {
 
 Game.propTypes = {
   username: PropType.string.isRequired,
-  changeUsername: PropType.func.isRequired,
+  setUsername: PropType.func.isRequired,
 };
 
 export default Game;

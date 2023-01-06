@@ -12,8 +12,10 @@ const addToScoresDB = async (score, levelName) => {
     ).withConverter(scoreConverter);
 
     await addDoc(docRef, score);
+    return true;
   } catch (e) {
     console.error('Error adding document: ', e);
+    return false;
   }
 };
 

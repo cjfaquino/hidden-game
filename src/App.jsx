@@ -8,11 +8,6 @@ import './App.css';
 
 function App() {
   const [username, setUsername] = useLocalStorage('username', 'Anonymous');
-  // const [username, setUsername] = useState('Anonymous');
-
-  const changeUsername = (input) => {
-    setUsername(input);
-  };
 
   return (
     <div className='app'>
@@ -20,7 +15,7 @@ function App() {
         <Route path='/' element={<Home />} />
         <Route
           path='/:name'
-          element={<Game username={username} changeUsername={changeUsername} />}
+          element={<Game username={username} setUsername={setUsername} />}
         />
         <Route path='/:name/leaderboard' element={<Leaderboard />} />
         <Route path='*' element={<Navigate to='/' replace />} />
