@@ -44,14 +44,44 @@ import thumbLoadingPs4 from '../assets/ps4-thumb-loading.jpg';
 import thumbLoadingXbox from '../assets/xbox-thumb-loading.jpg';
 import thumbLoading360 from '../assets/360-thumb-loading.jpg';
 
+import icon2b from '../assets/icons/2b.png';
+import iconBobomb from '../assets/icons/bobomb.png';
+import iconCj from '../assets/icons/cj.png';
+import iconCloud from '../assets/icons/cloud.png';
+import iconConker from '../assets/icons/conker.png';
+import iconCrash from '../assets/icons/crash.png';
+import iconDante from '../assets/icons/dante.png';
+import iconDrake from '../assets/icons/drake.png';
+import iconFatprincess from '../assets/icons/fatprincess.png';
+import iconIsaac from '../assets/icons/isaac.png';
+import iconJimmy from '../assets/icons/jimmy.png';
+import iconLightning from '../assets/icons/lightning.png';
+import iconLaharl from '../assets/icons/laharl.png';
+import iconLink from '../assets/icons/link.png';
+import iconLittlemac from '../assets/icons/littlemac.png';
+import iconLuigi from '../assets/icons/luigi.png';
+import iconMidna from '../assets/icons/midna.png';
+import iconOlimar from '../assets/icons/olimar.png';
+import iconParappa from '../assets/icons/parappa.png';
+import iconRaz from '../assets/icons/raz.png';
+import iconRyu from '../assets/icons/ryu.png';
+import iconSamus from '../assets/icons/samus.png';
+import iconSheik from '../assets/icons/sheik.png';
+import iconShepard from '../assets/icons/shepard.png';
+import iconSnake from '../assets/icons/snake.png';
+import iconToad from '../assets/icons/toad.png';
+import iconWolf from '../assets/icons/wolf.png';
+import iconZero from '../assets/icons/zero.png';
+import iconZoey from '../assets/icons/zoey.png';
+
 const levels = [
   new Level(
     'Super Nintendo',
     'SNES',
     [
-      { name: 'Link', found: false, x: 76.1, y: 43.6 },
-      { name: 'Samus', found: false, x: 56.3, y: 74.7 },
-      { name: 'Zero', found: false, x: 34.6, y: 63.5 },
+      { name: 'Link', iconUrl: iconLink, found: false, x: 76.1, y: 43.6 },
+      { name: 'Samus', iconUrl: iconSamus, found: false, x: 56.3, y: 74.7 },
+      { name: 'Zero', iconUrl: iconZero, found: false, x: 34.6, y: 63.5 },
     ],
     imgSnes,
     loadingSnes,
@@ -62,9 +92,9 @@ const levels = [
     'Nintendo 64',
     'N64',
     [
-      { name: 'Luigi', found: false, x: 72.6, y: 46.5 },
-      { name: 'Conker', found: false, x: 39.5, y: 59.5 },
-      { name: 'Bobomb', found: false, x: 71.6, y: 62.5 },
+      { name: 'Luigi', iconUrl: iconLuigi, found: false, x: 72.6, y: 46.5 },
+      { name: 'Conker', iconUrl: iconConker, found: false, x: 39.5, y: 59.5 },
+      { name: 'Bobomb', iconUrl: iconBobomb, found: false, x: 71.6, y: 62.5 },
     ],
     imgN64,
     loadingN64,
@@ -75,9 +105,9 @@ const levels = [
     'Nintendo Gamecube',
     'GC',
     [
-      { name: 'Shiek', found: false, x: 44.3, y: 66 },
-      { name: 'Olimar', found: false, x: 63.2, y: 62 },
-      { name: 'Toad', found: false, x: 34.4, y: 40 },
+      { name: 'Sheik', iconUrl: iconSheik, found: false, x: 44.3, y: 66 },
+      { name: 'Olimar', iconUrl: iconOlimar, found: false, x: 63.2, y: 62 },
+      { name: 'Toad', iconUrl: iconToad, found: false, x: 34.4, y: 40 },
     ],
     imgGc,
     loadingGc,
@@ -88,9 +118,15 @@ const levels = [
     'Nintendo Wii',
     'WII',
     [
-      { name: 'Samus', found: false, x: 71.6, y: 46.2 },
-      { name: 'Little Mac', found: false, x: 24.1, y: 55.1 },
-      { name: 'Midna', found: false, x: 39, y: 33.5 },
+      { name: 'Samus', iconUrl: iconSamus, found: false, x: 71.6, y: 46.2 },
+      {
+        name: 'Little Mac',
+        iconUrl: iconLittlemac,
+        found: false,
+        x: 24.1,
+        y: 55.1,
+      },
+      { name: 'Midna', iconUrl: iconMidna, found: false, x: 39, y: 33.5 },
     ],
     imgWii,
     loadingWii,
@@ -101,9 +137,9 @@ const levels = [
     'Microsoft Xbox',
     'XBOX',
     [
-      { name: 'CJ', found: false, x: 50.2, y: 55.3 },
-      { name: 'Ryu', found: false, x: 85.4, y: 41.2 },
-      { name: 'Raz', found: false, x: 37, y: 35 },
+      { name: 'CJ', iconUrl: iconCj, found: false, x: 50.2, y: 55.3 },
+      { name: 'Ryu', iconUrl: iconRyu, found: false, x: 85.4, y: 41.2 },
+      { name: 'Raz', iconUrl: iconRaz, found: false, x: 37, y: 35 },
     ],
     imgXbox,
     loadingXbox,
@@ -114,9 +150,9 @@ const levels = [
     'Microsoft Xbox 360',
     '360',
     [
-      { name: 'Shepard', found: false, x: 16.2, y: 45.5 },
-      { name: 'Isaac', found: false, x: 59.5, y: 57.1 },
-      { name: 'Zoey', found: false, x: 50.3, y: 74.4 },
+      { name: 'Shepard', iconUrl: iconShepard, found: false, x: 16.2, y: 45.5 },
+      { name: 'Isaac', iconUrl: iconIsaac, found: false, x: 59.5, y: 57.1 },
+      { name: 'Zoey', iconUrl: iconZoey, found: false, x: 50.3, y: 74.4 },
     ],
     img360,
     loading360,
@@ -127,9 +163,9 @@ const levels = [
     'PlayStation 1',
     'PS1',
     [
-      { name: 'Cloud', found: false, x: 16.5, y: 47.9 },
-      { name: 'Ape', found: false, x: 67.4, y: 57.7 },
-      { name: 'PaRappa', found: false, x: 38, y: 75 },
+      { name: 'Cloud', iconUrl: iconCloud, found: false, x: 16.5, y: 47.9 },
+      { name: 'Crash', iconUrl: iconCrash, found: false, x: 56, y: 59.3 },
+      { name: 'PaRappa', iconUrl: iconParappa, found: false, x: 38, y: 75 },
     ],
     imgPs1,
     loadingPs1,
@@ -140,9 +176,9 @@ const levels = [
     'PlayStation 2',
     'PS2',
     [
-      { name: 'Laharl', found: false, x: 69.2, y: 61.8 },
-      { name: 'Dante', found: false, x: 29.7, y: 65.3 },
-      { name: 'Jimmy', found: false, x: 63, y: 42.2 },
+      { name: 'Laharl', iconUrl: iconLaharl, found: false, x: 69.2, y: 61.8 },
+      { name: 'Dante', iconUrl: iconDante, found: false, x: 29.7, y: 65.3 },
+      { name: 'Jimmy', iconUrl: iconJimmy, found: false, x: 63, y: 42.2 },
     ],
     imgPs2,
     loadingPs2,
@@ -153,9 +189,21 @@ const levels = [
     'PlayStation 3',
     'PS3',
     [
-      { name: 'Joel', found: false, x: 79.4, y: 62.2 },
-      { name: 'Drake', found: false, x: 57.9, y: 57.7 },
-      { name: 'Fat Princess', found: false, x: 23.8, y: 36.2 },
+      {
+        name: 'Lightning',
+        iconUrl: iconLightning,
+        found: false,
+        x: 62.4,
+        y: 78,
+      },
+      { name: 'Drake', iconUrl: iconDrake, found: false, x: 57.9, y: 57.7 },
+      {
+        name: 'Fat Princess',
+        iconUrl: iconFatprincess,
+        found: false,
+        x: 23.8,
+        y: 36.2,
+      },
     ],
     imgPs3,
     loadingPs3,
@@ -166,9 +214,9 @@ const levels = [
     'PlayStation 4',
     'PS4',
     [
-      { name: 'Wolf', found: false, x: 67.5, y: 43.9 },
-      { name: 'Snake', found: false, x: 47.9, y: 36 },
-      { name: '2B', found: false, x: 28, y: 69 },
+      { name: 'Wolf', iconUrl: iconWolf, found: false, x: 67.5, y: 43.9 },
+      { name: 'Snake', iconUrl: iconSnake, found: false, x: 47.9, y: 36 },
+      { name: '2B', iconUrl: icon2b, found: false, x: 28, y: 69 },
     ],
     imgPs4,
     loadingPs4,

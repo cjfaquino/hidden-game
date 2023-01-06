@@ -51,8 +51,15 @@ function Popup({ items, checkCoords, coords, setItemFound }) {
           (item) =>
             !item.found && (
               <li key={crypto.randomUUID()}>
-                <button type='button' onClick={handleClick(item)}>
-                  {item.name}
+                <button
+                  type='button'
+                  onClick={handleClick(item)}
+                  className='popup-btn'
+                >
+                  <div className='popup-img-container'>
+                    <img src={item.iconUrl} alt={item.name} />
+                  </div>
+                  <div className='popup-item-name'>{item.name}</div>
                 </button>
               </li>
             )

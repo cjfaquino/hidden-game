@@ -147,7 +147,7 @@ header h1 {
 .popup {
   position: absolute;
   background-color: white;
-  width: 130px;
+  min-width: 130px;
   border-radius: 5px;
   overflow: hidden;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -159,6 +159,24 @@ header h1 {
 
 .popup li:last-child {
   border-bottom: none;
+}
+
+.popup-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.popup-img-container {
+  max-width: 40px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-color: rgb(240, 240, 240);
+}
+
+.popup-img-container img {
+  object-fit: cover;
+  width: 100%;
 }
 
 .popup button {
