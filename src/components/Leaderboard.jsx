@@ -30,7 +30,11 @@ function Leaderboard() {
             <img src={currentItem.thumbUrl} alt={currentItem.name.long} />
           </div>
         )}
-        {loading && <Loading />}
+        {loading && (
+          <div className='top10 loading'>
+            <Loading />
+          </div>
+        )}
         {!loading && (
           <div className='top10'>
             <h2>Top 10 Scores</h2>

@@ -1,3 +1,7 @@
+:root {
+  --header-size: 50px;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
@@ -12,23 +16,28 @@ nav {
 }
 
 nav {
-  padding: 20px;
+  height: var(--header-size);
+  padding: 0 10px;
   position: sticky;
   top: 0;
   background-color: white;
 }
 
 nav a {
+  padding: 5px;
   color: grey;
   text-decoration: none;
+  border-radius: 5px;
   transition: all 0.15s ease-in-out;
 }
 
 nav a:hover {
   color: black;
+  background-color: rgb(237, 235, 235);
 }
 
 nav ul {
+  height: 100%;
   margin: 0 auto;
   max-width: 1430px;
   display: flex;
@@ -65,11 +74,11 @@ nav button:hover {
 }
 
 .home-link a {
-  width: 18px;
+  width: 32px;
 }
 
 .leaderboard-link a {
-  width: 24px;
+  width: 36px;
 }
 
 .nav-link-img {
@@ -348,6 +357,11 @@ header h1 {
 
 /* Leaderboard */
 
+/* .board-img-container,
+.top10 {
+  height: 656px;
+} */
+
 .board-img-container {
   max-width: 300px;
 }
@@ -413,6 +427,10 @@ header h1 {
 }
 
 @media (max-width: 1000px) {
+  :root {
+    --game-img-height: 40vw;
+  }
+
   .app:has(.leaderboard) {
     background-color: white;
   }
@@ -432,13 +450,13 @@ header h1 {
     flex-direction: column;
     align-items: center;
     width: fit-content;
-    min-height: 40vh;
     border-radius: 0;
+    margin-bottom: 0;
   }
 
   .board-img-container {
     max-width: 100vw;
-    height: 40vw;
+    height: var(--game-img-height);
   }
 
   .board-img-container img {
@@ -449,6 +467,18 @@ header h1 {
   .leaderboard,
   .top10 {
     width: 100%;
+  }
+
+  .top10 .loader {
+    position: absolute;
+  }
+
+  .top10.loading {
+    padding: 0;
+    min-height: calc(
+      100vh - var(--footer-size) - var(--header-size) - var(--game-img-height)
+    );
+    position: relative;
   }
 
   .top10 h2 {
@@ -504,9 +534,5 @@ header h1 {
 @media (max-width: 400px) {
   nav ul {
     gap: 10px;
-  }
-
-  .leaderboard-link a {
-    width: 20px;
   }
 }
