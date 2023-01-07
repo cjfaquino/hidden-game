@@ -51,17 +51,6 @@ nav li {
   align-items: center;
 }
 
-nav button {
-  background-color: transparent;
-  border: none;
-  font-size: 1rem;
-  transition: all 0.2s ease-in-out;
-}
-
-nav button:hover {
-  color: red;
-}
-
 .home-link {
   margin-right: 50px;
 }
@@ -77,8 +66,8 @@ nav button:hover {
   width: 32px;
 }
 
-.leaderboard-link a {
-  width: 36px;
+.leaderboard-link img {
+  width: 28px;
 }
 
 .nav-link-img {

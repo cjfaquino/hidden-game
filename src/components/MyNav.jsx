@@ -1,18 +1,11 @@
 import React from 'react';
-import {
-  Outlet,
-  Link,
-  useParams,
-  useLocation,
-  useNavigate,
-} from 'react-router-dom';
+import { Outlet, Link, useParams, useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Stopwatch from './Stopwatch';
 import homeIcon from '../assets/svgs/home.svg';
 import leaderboardIcon from '../assets/svgs/leaderboard.svg';
 
 function MyNav({ duration, items, prevLevel, nextLevel }) {
-  const navigate = useNavigate();
   const location = useLocation();
   const params = useParams();
   return (
@@ -64,10 +57,10 @@ function MyNav({ duration, items, prevLevel, nextLevel }) {
                 />
               </Link>
             )}
-            {location.pathname.endsWith('leaderboard') && (
-              <button type='button' onClick={() => navigate(-1)}>
+            {location.pathname.endsWith('leaderboard') && location.state && (
+              <Link to={`/${params.name}`} state={location.state}>
                 Retry
-              </button>
+              </Link>
             )}
           </li>
         </ul>
