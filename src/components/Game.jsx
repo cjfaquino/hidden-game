@@ -3,38 +3,33 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import PropType from 'prop-types';
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import addToScoresDB from '../utils/addToScoreDB';
 import getCoords from '../utils/getCoords';
 import useStopwatch from '../utils/useStopwatch';
 import useLevelFromDB from '../utils/useLevelFromDB';
+import usePagination from '../utils/usePagination';
 import SubmitScorePopup from './SubmitScorePopup';
 import ProgressiveImg from './ProgressiveImg';
 import Score from './Score';
 import MyNav from './MyNav';
 import Popup from './Popup';
+import Loading from './Loading/Loading';
 
 function Game({ username, setUsername }) {
   const navigate = useNavigate();
+  const params = useParams();
   const location = useLocation();
-  if (location.state === null) navigate('/');
-
-  const level = location.state;
-  const {
-    imgUrl,
-    items,
-    loadingUrl,
-    name: { short },
-  } = level;
-
   const [duration, setIsActive] = useStopwatch();
   const [isImgLoaded, setIsImgLoaded] = useState(false);
   const [popup, setPopup] = useState(null);
   const [submitScorePopup, setSubmitScorePopup] = useState(false);
   const [sendingScores, setSendingScores] = useState(false);
   const [submitError, setSubmitError] = useState(null);
-  const [itemsArr, setItemsArr] = useState(items);
-  const [dbLevel, dBlevelLoading] = useLevelFromDB(short);
+  const [itemsArr, setItemsArr] = useState(undefined);
+  const [level, setLevel] = useState(null);
+  const [dbLevel, dBlevelLoading] = useLevelFromDB(params.name);
+  const [, , currentLevel] = usePagination(params.name);
 
   const checkIfAllFound = () => itemsArr.every((item) => item.found);
 
@@ -111,25 +106,44 @@ function Game({ username, setUsername }) {
   }, [dBlevelLoading, isImgLoaded]);
 
   useEffect(() => {
-    if (checkIfAllFound()) {
+    if (itemsArr && checkIfAllFound()) {
       setIsActive(false);
       showScorePopup();
     }
   }, [itemsArr]);
 
+  useEffect(() => {
+    if (!level && location.state !== null) {
+      setLevel(location.state);
+      setItemsArr(location.state.items);
+    }
+
+    if (!level && currentLevel) {
+      setLevel(currentLevel);
+      setItemsArr(currentLevel.items);
+    }
+  }, [currentLevel]);
+
   return (
     <>
       <MyNav duration={duration} items={itemsArr} />
+      {!isImgLoaded && (
+        <div className='game-loader'>
+          <Loading />
+        </div>
+      )}
       <div className='game'>
         <div className='game-img-container' onClick={handlePopup}>
-          <ProgressiveImg
-            placeholderSrc={loadingUrl}
-            src={imgUrl}
-            alt={level.name.long}
-            id='game-image'
-            handleLoad={handleLoad}
-            dbLevel={dbLevel}
-          />
+          {level && (
+            <ProgressiveImg
+              placeholderSrc={level.loadingUrl}
+              src={level.imgUrl}
+              alt={level.name.long}
+              id='game-image'
+              handleLoad={handleLoad}
+              dbLevel={dbLevel}
+            />
+          )}
           {popup}
         </div>
         {submitScorePopup && (
