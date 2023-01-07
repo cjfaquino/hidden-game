@@ -324,25 +324,25 @@ header h1 {
   color: red;
 }
 
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .btn-submit {
   min-width: 76px;
+  min-height: 38px;
   padding: 10px;
   border: none;
   background-color: rgb(88, 169, 255);
   color: white;
   font-weight: 700;
+  position: relative;
 }
 
 .btn-submit.loading {
   background-color: rgb(14, 130, 255);
-}
-
-.btn-submit.loading:after {
-  content: '.';
-  padding-right: 10px;
-  position: relative;
-  top: -3px;
-  animation: dots 1s steps(5, end) infinite;
 }
 
 @keyframes dots {

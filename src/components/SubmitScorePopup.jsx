@@ -1,6 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import fancyTime from '../utils/fancyTime';
+import Dots from './Loading/Dots';
 
 function SubmitScorePopup({
   duration,
@@ -74,7 +75,13 @@ function SubmitScorePopup({
               type='submit'
               className={sendingScores ? 'btn-submit loading' : 'btn-submit'}
             >
-              {sendingScores ? '' : 'Submit'}
+              {sendingScores ? (
+                <div className='dots'>
+                  <Dots />
+                </div>
+              ) : (
+                'Submit'
+              )}
             </button>
           </div>
         </form>
