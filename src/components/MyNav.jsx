@@ -38,7 +38,7 @@ function MyNav({ duration, items, prevLevel, nextLevel }) {
           {items.map((item) => (
             <li
               className={!item.found ? 'nav-item' : 'nav-item found'}
-              key={crypto.randomUUID()}
+              key={`nav-${item.name}`}
             >
               {item.name}
             </li>

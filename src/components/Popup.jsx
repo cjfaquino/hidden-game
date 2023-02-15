@@ -50,7 +50,7 @@ function Popup({ items, checkCoords, coords, setItemFound }) {
         {items.map(
           (item) =>
             !item.found && (
-              <li key={crypto.randomUUID()}>
+              <li key={`popup-${item.name}`}>
                 <button
                   type='button'
                   onClick={handleClick(item)}

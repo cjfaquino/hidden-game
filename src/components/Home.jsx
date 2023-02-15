@@ -12,10 +12,10 @@ function Home() {
       <div className='home'>
         {levels.map((level) => {
           const { name, thumbUrl, thumbLoadingUrl } = level;
+
           return (
-            <div className='home-img-container' key={crypto.randomUUID()}>
+            <div className='home-img-container' key={`home-${name.long}`}>
               <Link to={`${name.short}`} state={level}>
-                {/* <img src={thumbUrl} alt={name.long} /> */}
                 <ProgressiveImg
                   placeholderSrc={thumbLoadingUrl}
                   src={thumbUrl}
