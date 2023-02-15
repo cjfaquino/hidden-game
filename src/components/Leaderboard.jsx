@@ -47,11 +47,7 @@ function Leaderboard() {
               </div>
 
               {scores.map((obj, index) => (
-                <LeaderboardItem
-                  key={crypto.randomUUID()}
-                  obj={obj}
-                  index={index}
-                />
+                <LeaderboardItem key={obj.id} obj={obj} index={index} />
               ))}
             </div>
           </div>

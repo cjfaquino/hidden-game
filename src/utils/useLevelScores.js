@@ -7,27 +7,38 @@ const useLevelScores = (levelName) => {
   const [scores, setScores] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const getScores = async () => {
+    try {
+      const q = query(
+        collection(db, 'leaderboard', levelName, 'scores').withConverter(
+          scoreConverter
+        ),
+        orderBy('score', 'asc'),
+        limit(10)
+      );
+
+      const querySnapshot = await getDocs(q);
+
+      const temp = querySnapshot.docs.map((item) => ({
+        id: item.id,
+        ...item.data(0),
+      }));
+      setScores(temp);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+
   useEffect(() => {
     setLoading(true);
-    const q = query(
-      collection(db, 'leaderboard', levelName, 'scores').withConverter(
-        scoreConverter
-      ),
-      orderBy('score', 'asc'),
-      limit(10)
-    );
 
-    (async () => {
-      const tempArr = scores.slice();
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((dc) => {
-        // doc.data() is never undefined for query doc snapshots
-        tempArr.push(dc.data());
-        setScores(tempArr);
-      });
-      setLoading(false);
-    })();
-  }, []);
+    getScores();
+
+    return () => {
+      setScores([]);
+    };
+  }, [levelName]);
 
   return [scores, loading];
 };
